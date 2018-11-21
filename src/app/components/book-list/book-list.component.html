@@ -1,0 +1,8 @@
+  <div *ngFor="let book of books">
+    <app-book 
+      [book]="book" 
+      (onRateUp)="rateUp(book)"
+      (onRateDown)="rateDown(book)"
+    ></app-book>
+  </div>
+  

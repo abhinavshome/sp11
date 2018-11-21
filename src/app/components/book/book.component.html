@@ -1,0 +1,11 @@
+<div *ngIf="book.rating > 1" [class.high]="book.rating>=4">
+    <div class="title">{{ book.title }}</div>
+    <div class="author">{{ book.author }}</div>
+    <div>{{ book.rating }}</div>
+    <div>{{ book.price }}</div>
+    <div>
+      <button (click)="onRateUpBtnClick(book)">+</button>
+      <button (click)="onRateDownBtnClick(book)">-</button>
+    </div>
+    <hr />
+</div>
