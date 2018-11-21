@@ -40,6 +40,10 @@ export class BookListComponent implements OnInit {
       book.rating--;
   }
 
+  addBook(book: Book) {
+    this.books.push(book);
+  }
+
   constructor() { }
 
   ngOnInit() {
