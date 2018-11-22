@@ -1,43 +1,47 @@
-<form #addBookForm="ngForm" (ngSubmit)="onSaveBtnClick()">
+<form #addBookForm="ngForm" (ngSubmit)="onSaveBtnClick();addBookForm.reset()">
   <div>
     <label>Title</label>
-    <input type="text" name="title" [(ngModel)]="newBook.title">
+    <input type="text" name="title" [(ngModel)]="newBook.title" required minlength="4" #title="ngModel">
+    <div *ngIf="title.invalid && (title.touched || title.dirty)">
+      <div *ngIf="title.errors.required" class="error">
+        Title is required
+      </div>
+      <div *ngIf="title.errors.minlength" class="error">
+        Minmum 4 chars
+      </div>
+    </div>
   </div>
   <div>
     <label>Auhtor</label>
-    <input type="text" name="author" [(ngModel)]="newBook.author">
+    <input type="text" name="author" [(ngModel)]="newBook.author" required #author="ngModel">
+    <div *ngIf="author.invalid && (author.touched || author.dirty)">
+        <div *ngIf="author.errors.required" class="error">
+          Author is required
+        </div>
+      </div>
   </div>
   <div>
     <label>Price</label>
-    <input type="text" name="price" [(ngModel)]="newBook.price">
+    <input type="text" name="price" [(ngModel)]="newBook.price" required>
   </div>
   <div>
     <label>Rating</label>
-    <select name="rating" [(ngModel)]="newBook.rating">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+    <select name="rating" [(ngModel)]="newBook.rating" required>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
     </select>
   </div>
-  <button type="submit">Save</button>
+  <button [disabled]="addBookForm.invalid" type="submit">Save</button>
 </form>
 
 {{ newBook | json }}
 
+{{ addBookForm.valid }}
 
-Title: <input type="text" #title /> <br />
-Author: <input type="text" #author /> <br />
-Price: <input type="text" #price /> <br />
-Rating: <select #rating>
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
+{{ title.valid }}
+{{ title.errors | json }}
 
 <br />
-
-<button (click)="onSaveBtnClick(title, author, price, rating)">Save</button>
