@@ -1,14 +1,43 @@
-Title: <input type="text" #title /> <br/>
-Author: <input type="text" #author /> <br/>
-Price: <input type="text" #price /> <br/>
-Rating: <select #rating >
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-  </select>
+<form #addBookForm="ngForm" (ngSubmit)="onSaveBtnClick()">
+  <div>
+    <label>Title</label>
+    <input type="text" name="title" [(ngModel)]="newBook.title">
+  </div>
+  <div>
+    <label>Auhtor</label>
+    <input type="text" name="author" [(ngModel)]="newBook.author">
+  </div>
+  <div>
+    <label>Price</label>
+    <input type="text" name="price" [(ngModel)]="newBook.price">
+  </div>
+  <div>
+    <label>Rating</label>
+    <select name="rating" [(ngModel)]="newBook.rating">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+  </div>
+  <button type="submit">Save</button>
+</form>
 
-  <br/>
+{{ newBook | json }}
+
+
+Title: <input type="text" #title /> <br />
+Author: <input type="text" #author /> <br />
+Price: <input type="text" #price /> <br />
+Rating: <select #rating>
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+</select>
+
+<br />
 
 <button (click)="onSaveBtnClick(title, author, price, rating)">Save</button>

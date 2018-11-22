@@ -8,25 +8,26 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class AddBookComponent implements OnInit {
   @Output() onBookAdd = new EventEmitter();
+  newBook: Book = {
+    title: null,
+    author: null,
+    price: null,
+    rating: null
+  };
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSaveBtnClick(title, author, price, rating) {
-    let newBook: Book = {
-      title: title.value,
-      author: author.value,
-      price: +price.value,
-      rating: +rating.value
+  onSaveBtnClick() {
+    this.onBookAdd.emit(this.newBook);
+    this.newBook = {
+      title: null,
+      author: null,
+      price: null,
+      rating: null
     };
-
-    this.onBookAdd.emit(newBook);
-
-    title.value = null;
-    author.value = null;
-    price.value = null;
-    rating.value = null;
   }
 
 }

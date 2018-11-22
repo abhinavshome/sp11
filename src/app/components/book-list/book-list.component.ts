@@ -23,7 +23,7 @@ export class BookListComponent implements OnInit {
   }
 
   addBook(book: Book) {
-    this.books.push(book);
+    this.bookService.addBook(book);
   }
 
   constructor(private bookService: BookService) { 

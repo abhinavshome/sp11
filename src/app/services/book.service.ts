@@ -31,5 +31,9 @@ export class BookService {
     return this.books;
   }
 
+  addBook(book:Book) {
+    this.books.push(book);
+  }
+
   constructor() { }
 }
