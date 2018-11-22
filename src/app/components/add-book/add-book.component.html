@@ -15,10 +15,10 @@
     <label>Auhtor</label>
     <input type="text" name="author" [(ngModel)]="newBook.author" required #author="ngModel">
     <div *ngIf="author.invalid && (author.touched || author.dirty)">
-        <div *ngIf="author.errors.required" class="error">
-          Author is required
-        </div>
+      <div *ngIf="author.errors.required" class="error">
+        Author is required
       </div>
+    </div>
   </div>
   <div>
     <label>Price</label>
@@ -26,14 +26,20 @@
   </div>
   <div>
     <label>Rating</label>
-    <select name="rating" [(ngModel)]="newBook.rating" required>
+    <select name="rating" [(ngModel)]="newBook.rating" required (change)="checkPrice()" #rating="ngModel">
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4</option>
       <option>5</option>
     </select>
+    <div *ngIf="rating.touched || rating.dirty">
+        <div *ngIf="ratingError" class="error">
+          If price > 50, rating has to be > 3
+        </div>
+      </div>
   </div>
+  
   <button [disabled]="addBookForm.invalid" type="submit">Save</button>
 </form>
 

@@ -14,6 +14,7 @@ export class AddBookComponent implements OnInit {
     price: null,
     rating: null
   };
+  ratingError;
 
   constructor() { }
 
@@ -28,6 +29,14 @@ export class AddBookComponent implements OnInit {
       price: null,
       rating: null
     };
+  }
+
+  checkPrice() {
+    if(this.newBook.price > 50 && this.newBook.rating < 3) {
+      this.ratingError = true;
+    } else {
+      this.ratingError = false;
+    }
   }
 
 }
