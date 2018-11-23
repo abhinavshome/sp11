@@ -1,39 +1,26 @@
 import { Book } from './../models/book';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private books: Book[] = [{
-    title: 'The Alcheimst',
-    author: 'Paulo Cohelo',
-    price: 20,
-    rating: 4
-  }, {
-    title: 'The monk who sold his ferrari',
-    author: 'Robin Sharma',
-    price: 30,
-    rating: 2
-  }, {
-    title: 'THE NIGHTINGALE',
-    author: 'Kristin Hannah',
-    price: 40,
-    rating: 1
-  }, {
-    title: 'Harry Potter',
-    author: 'J K Rowling',
-    price: 10,
-    rating: 3
-  }];
+  url = 'http://localhost:3000/books/';
 
   getBooks() {
-    return this.books;
+    return this.http.get(this.url);
   }
 
-  addBook(book:Book) {
-    this.books.push(book);
+  addBook(book: Book) {
+    return this.http.post(this.url, book);
   }
 
-  constructor() { }
+  editBook(book: Book) {
+    return this.http.put(this.url + book.id, book);
+  }
+
+  constructor(private http: Http) { 
+
+  }
 }

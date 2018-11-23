@@ -17,9 +17,9 @@ export class BookListComponent implements OnInit {
   rateUp(book: Book) {
     if (book.rating < 5) {
       book.rating++;
-      this.http
-        .put(this.url + book.id, book)
-        .subscribe()
+      this.bookService
+        .editBook(book)
+        .subscribe();
     }
 
   }
@@ -27,20 +27,18 @@ export class BookListComponent implements OnInit {
   rateDown(book: Book) {
     if (book.rating > 1) {
       book.rating--;
-      this.http
-        .put(this.url + book.id, book)
-        .subscribe()
+      this.bookService
+        .editBook(book)
+        .subscribe();
     }
   }
 
   addBook(book: Book) {
-    // this.bookService.addBook(book);
-
-    this.http
-      .post(this.url, book)
-      .subscribe(
-      res => this.books.push(res.json()))
-      )
+      this.bookService
+        .addBook(book)
+        .subscribe(
+        res => this.books.push(res.json())
+      );
   }
 
   constructor(private bookService: BookService, private http: Http) {
@@ -48,10 +46,8 @@ export class BookListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.books = this.bookService.getBooks();
-
-    this.http
-      .get(this.url)
+    this.bookService
+      .getBooks()
       .subscribe(
       res => this.books = res.json(),
       err => console.log(err)
