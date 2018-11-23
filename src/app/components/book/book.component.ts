@@ -9,6 +9,7 @@ export class BookComponent implements OnInit {
   @Input() book;
   @Output() onRateUp = new EventEmitter();
   @Output() onRateDown = new EventEmitter();
+  today = new Date();
 
   constructor() { }
 
