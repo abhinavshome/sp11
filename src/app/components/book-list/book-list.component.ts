@@ -11,20 +11,36 @@ import { Http } from '@angular/http';
 export class BookListComponent implements OnInit {
 
   books: Book[];
+  url = 'http://localhost:3000/books/';
 
 
   rateUp(book: Book) {
-    if (book.rating < 5)
+    if (book.rating < 5) {
       book.rating++;
+      this.http
+        .put(this.url + book.id, book)
+        .subscribe()
+    }
+
   }
 
   rateDown(book: Book) {
-    if (book.rating > 1)
+    if (book.rating > 1) {
       book.rating--;
+      this.http
+        .put(this.url + book.id, book)
+        .subscribe()
+    }
   }
 
   addBook(book: Book) {
-    this.bookService.addBook(book);
+    // this.bookService.addBook(book);
+
+    this.http
+      .post(this.url, book)
+      .subscribe(
+      res => this.books.push(res.json()))
+      )
   }
 
   constructor(private bookService: BookService, private http: Http) {
@@ -35,10 +51,10 @@ export class BookListComponent implements OnInit {
     //this.books = this.bookService.getBooks();
 
     this.http
-      .get('http://localhost:3000/books')
+      .get(this.url)
       .subscribe(
-        (res) => { this.books = res.json() },
-        (err) => { console.log(err)}
+      res => this.books = res.json(),
+      err => console.log(err)
       )
   }
 
