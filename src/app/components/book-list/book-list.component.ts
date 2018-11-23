@@ -1,6 +1,7 @@
 import { BookService } from './../../services/book.service';
 import { Book } from './../../models/book';
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-book-list',
@@ -9,16 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookListComponent implements OnInit {
 
-  books : Book[];
-  
+  books: Book[];
+
 
   rateUp(book: Book) {
-    if(book.rating < 5)
+    if (book.rating < 5)
       book.rating++;
   }
 
   rateDown(book: Book) {
-    if(book.rating > 1)
+    if (book.rating > 1)
       book.rating--;
   }
 
@@ -26,12 +27,19 @@ export class BookListComponent implements OnInit {
     this.bookService.addBook(book);
   }
 
-  constructor(private bookService: BookService) { 
-    
+  constructor(private bookService: BookService, private http: Http) {
+
   }
 
   ngOnInit() {
-    this.books = this.bookService.getBooks();
+    //this.books = this.bookService.getBooks();
+
+    this.http
+      .get('http://localhost:3000/books')
+      .subscribe(
+        (res) => { this.books = res.json() },
+        (err) => { console.log(err)}
+      )
   }
 
 }
