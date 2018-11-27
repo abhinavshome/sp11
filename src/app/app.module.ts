@@ -11,6 +11,7 @@ import { BookComponent } from './components/book/book.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { TitlecasePipe } from './pipes/titlecase.pipe';
 import { AboutComponent } from './components/about/about.component';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AboutComponent } from './components/about/about.component';
     BookComponent,
     AddBookComponent,
     TitlecasePipe,
-    AboutComponent
+    AboutComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,

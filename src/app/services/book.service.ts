@@ -12,6 +12,10 @@ export class BookService {
     return this.http.get(this.url);
   }
 
+  getBook(bookId) {
+    return this.http.get(this.url + bookId);
+  }
+
   addBook(book: Book) {
     return this.http.post(this.url, book);
   }

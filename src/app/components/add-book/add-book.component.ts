@@ -9,14 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-book.component.css']
 })
 export class AddBookComponent implements OnInit {
-  @Output() onBookAdd = new EventEmitter();
   newBook: Book = {
     title: null,
     author: null,
     price: null,
     rating: null
   };
-  ratingError;
 
   constructor(private bookService: BookService, private router: Router) { }
 

@@ -1,5 +1,5 @@
 <div *ngIf="book.rating > 1" [class.high]="book.rating>=4">
-    <div class="title">{{ book.title | titlecase }}</div>
+    <a routerLink="/book/{{book.id}}" class="title">{{ book.title | titlecase }}</a>
     <div class="author">{{ book.author }}</div>
     <div>{{ book.rating  }}</div>
     <div>{{ book.price | currency:'INR' }}</div>
