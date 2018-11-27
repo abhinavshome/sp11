@@ -11,8 +11,6 @@ import { Http } from '@angular/http';
 export class BookListComponent implements OnInit {
 
   books: Book[];
-  url = 'http://localhost:3000/books/';
-
 
   rateUp(book: Book) {
     if (book.rating < 5) {
@@ -31,14 +29,6 @@ export class BookListComponent implements OnInit {
         .editBook(book)
         .subscribe();
     }
-  }
-
-  addBook(book: Book) {
-      this.bookService
-        .addBook(book)
-        .subscribe(
-        res => this.books.push(res.json())
-      );
   }
 
   constructor(private bookService: BookService, private http: Http) {

@@ -1,5 +1,7 @@
+import { BookService } from './../../services/book.service';
 import { Book } from './../../models/book';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-book',
@@ -16,27 +18,17 @@ export class AddBookComponent implements OnInit {
   };
   ratingError;
 
-  constructor() { }
+  constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onSaveBtnClick() {
-    this.onBookAdd.emit(this.newBook);
-    this.newBook = {
-      title: null,
-      author: null,
-      price: null,
-      rating: null
-    };
-  }
-
-  checkPrice() {
-    if(this.newBook.price > 50 && this.newBook.rating < 3) {
-      this.ratingError = true;
-    } else {
-      this.ratingError = false;
-    }
+  addBook() {
+    this.bookService
+      .addBook(this.newBook)
+      .subscribe(
+        () => this.router.navigate(['/home'])
+      );
   }
 
 }
